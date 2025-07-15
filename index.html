@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Kiara, mi princesa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6741 50%, #2c3e50 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 900px;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-in-out;
+            border: 2px solid #d4af37;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .crown {
+            color: #d4af37;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: gentle-glow 3s infinite;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+        }
+        
+        @keyframes gentle-glow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5)); }
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 400;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            border-left: 4px solid #d4af37;
+            text-align: left;
+        }
+        
+        .message p {
+            margin-bottom: 20px;
+        }
+        
+        .message .highlight {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: float 8s infinite linear;
+            opacity: 0.6;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(120vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .promise-button {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 30px;
+            font-weight: 500;
+        }
+        
+        .promise-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .sparkle {
+            position: absolute;
+            color: #d4af37;
+            font-size: 0.8rem;
+            animation: sparkle 4s infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1) rotate(180deg); }
+        }
+        
+        .dedication {
+            margin-top: 40px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            font-style: italic;
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .signature {
+            margin-top: 35px;
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(212, 175, 55, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-info {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="floating-elements" id="floatingElements"></div>
+        <div class="sparkles" id="sparkles"></div>
+        
+        <!-- Control de música -->
+        <button class="music-control" id="musicToggle" onclick="toggleMusic()">🎵</button>
+        <div class="music-info" id="musicInfo">♪ Música romántica ♪</div>
+        
+        <!-- Audio element -->
+        <audio id="backgroundMusic" loop>
+            <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+            <!-- Aquí puedes cambiar por tu canción favorita -->
+            <!-- <source src="URL_DE_TU_CANCION.mp3" type="audio/mpeg"> -->
+        </audio>
+        
+        <div class="crown">👑</div>
+        
+        <h1>Para Kiara</h1>
+        <div class="subtitle">Mi princesa, mi Kiki</div>
+        
+        <div class="message">
+            <p>Kiki, hay algo que quiero que sepas: <span class="highlight">eres mi princesa</span>, no solo por como te veo, sino por quien eres realmente.</p>
+            
+            <p>Sé que enfrentamos desafíos, que a veces las cosas se complican, pero quiero que sepas que <span class="highlight">nada de eso opaca lo que estamos construyendo juntos</span>. Cada día contigo es un paso más hacia algo hermoso y real.</p>
+            
+            <p><span class="highlight">La vida nos da oportunidades hermosas</span>, y tú eres la más hermosa que he recibido. Creo firmemente que <span class="highlight">todo saldrá bien</span> porque tenemos algo real, algo que vale la pena.</p>
+            
+            <p>Te amo, Kiara. No solo te quiero por un momento, <span class="highlight">te quiero para toda mi vida</span>. Quiero que sepas que estoy aquí, que voy a luchar por nosotros, y que cada problema que enfrentemos solo nos hará más fuertes.</p>
+            
+            <p>Esto que tenemos es especial, y yo creo en nosotros. Creo en ti, creo en mí, y creo en lo que podemos ser juntos. <span class="highlight">Las mejores cosas de la vida vienen a quienes saben esperar y luchar por ellas</span>.</p>
+        </div>
+        
+        <div class="dedication">
+            "Una princesa no necesita rescate, necesita a alguien que valore su reino y quiera construir uno nuevo junto a ella."
+            <br><br>
+            "La vida siempre encuentra una manera de darnos exactamente lo que necesitamos en el momento perfecto."
+        </div>
+        
+        <button class="promise-button" onclick="showVideo()">💖 Un mensaje especial para ti 💖</button>
+        
+        <div class="signature">
+            Con amor verdadero,<br>
+            Quien te ama tal como eres
+        </div>
+    </div>
+
+    <script>
+        let musicPlaying = false;
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicInfo = document.getElementById('musicInfo');
+        
+        // Función para controlar la música
+        function toggleMusic() {
+            if (musicPlaying) {
+                backgroundMusic.pause();
+                musicToggle.innerHTML = '🎵';
+                musicToggle.style.backgroundColor = 'rgba(212, 175, 55, 0.9)';
+                musicPlaying = false;
+            } else {
+                backgroundMusic.play().catch(e => {
+                    console.log('Error al reproducir música:', e);
+                    alert('Para escuchar música, por favor interactúa con la página primero (haz clic en cualquier lugar)');
+                });
+                musicToggle.innerHTML = '🎶';
+                musicToggle.style.backgroundColor = 'rgba(46, 125, 50, 0.9)';
+                musicPlaying = true;
+            }
+        }
+        
+        // Mostrar info de música al pasar mouse
+        musicToggle.addEventListener('mouseenter', () => {
+            musicInfo.style.opacity = '1';
+        });
+        
+        musicToggle.addEventListener('mouseleave', () => {
+            musicInfo.style.opacity = '0';
+        });
+        
+        // Intentar reproducir música automáticamente después de interacción
+        document.addEventListener('click', function playMusicOnFirstClick() {
+            if (!musicPlaying) {
+                backgroundMusic.play().catch(e => console.log('Música no disponible'));
+                musicToggle.innerHTML = '🎶';
+                musicToggle.style.backgroundColor = 'rgba(46, 125, 50, 0.9)';
+                musicPlaying = true;
+            }
+            document.removeEventListener('click', playMusicOnFirstClick);
+        }, { once: true });
+        
+        // Crear elementos flotantes elegantes
+        function createFloatingElement() {
+            const elements = ['👑', '✨', '🌟', '💫'];
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+            element.style.left = Math.random() * 100 + '%';
+            element.style.animationDelay = Math.random() * 3 + 's';
+            element.style.color = Math.random() > 0.5 ? '#d4af37' : '#7f8c8d';
+            document.getElementById('floatingElements').appendChild(element);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 8000);
+        }
+        
+        // Crear destellos sutiles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 4 + 's';
+            document.getElementById('sparkles').appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 4000);
+        }
+        
+        // Video modal
+        function showVideo() {
+            // Crear modal para el video
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.zIndex = '1000';
+            modal.style.animation = 'fadeIn 0.5s ease-in-out';
+            
+            const videoContainer = document.createElement('div');
+            videoContainer.style.position = 'relative';
+            videoContainer.style.backgroundColor = 'white';
+            videoContainer.style.borderRadius = '15px';
+            videoContainer.style.padding = '20px';
+            videoContainer.style.maxWidth = '600px';
+            videoContainer.style.width = '90%';
+            videoContainer.style.textAlign = 'center';
+            
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '×';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '10px';
+            closeButton.style.right = '15px';
+            closeButton.style.background = 'none';
+            closeButton.style.border = 'none';
+            closeButton.style.fontSize = '30px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.color = '#999';
+            closeButton.onclick = () => modal.remove();
+            
+            const title = document.createElement('h3');
+            title.innerHTML = 'Un mensaje del corazón para mi Kiki 💖';
+            title.style.marginBottom = '20px';
+            title.style.color = '#2c3e50';
+            
+            const videoFrame = document.createElement('iframe');
+            videoFrame.width = '100%';
+            videoFrame.height = '315';
+            videoFrame.style.borderRadius = '10px';
+            videoFrame.style.border = 'none';
+            videoFrame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            videoFrame.allowFullscreen = true;
+            
+            // Aquí puedes cambiar por el ID del video de YouTube que quieras
+            // Por ejemplo: https://www.youtube.com/watch?v=VIDEO_ID
+            // Solo necesitas el VIDEO_ID después del =
+            videoFrame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0';
+            
+            const message = document.createElement('p');
+            message.innerHTML = 'Mi querida Kiki, este video expresa todo lo que siento por ti. 💖<br><br>¡Todo saldrá bien porque tenemos algo hermoso juntos!';
+            message.style.marginTop = '15px';
+            message.style.color = '#34495e';
+            message.style.fontSize = '1.1rem';
+            
+            videoContainer.appendChild(closeButton);
+            videoContainer.appendChild(title);
+            videoContainer.appendChild(videoFrame);
+            videoContainer.appendChild(message);
+            modal.appendChild(videoContainer);
+            document.body.appendChild(modal);
+            
+            // Cerrar modal al hacer clic fuera
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+        
+        // Inicializar efectos suaves
+        setInterval(createFloatingElement, 1500);
+        setInterval(createSparkle, 2000);
+        
+        // Efecto elegante al hacer clic
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'BUTTON') {
+                const element = document.createElement('div');
+                element.innerHTML = '✨';
+                element.style.position = 'fixed';
+                element.style.left = e.clientX + 'px';
+                element.style.top = e.clientY + 'px';
+                element.style.color = '#d4af37';
+                element.style.fontSize = '1.2rem';
+                element.style.pointerEvents = 'none';
+                element.style.zIndex = '1000';
+                element.style.animation = 'gentlePop 1.5s ease-out forwards';
+                document.body.appendChild(element);
+                
+                setTimeout(() => {
+                    element.remove();
+                }, 1500);
+            }
+        });
+        
+        // Animación elegante para clics
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes gentlePop {
+                0% { transform: scale(0) rotate(0deg); opacity: 1; }
+                50% { transform: scale(1.1) rotate(180deg); opacity: 0.9; }
+                100% { transform: scale(0) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
